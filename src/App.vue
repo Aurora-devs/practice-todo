@@ -1,12 +1,14 @@
 <template>
-  <AddTodo />
+  <AddTodo :formVisibility="formVisibility" @closeForm="toggleFormVisibility" />
   <main>
     <section class="date">
       <Date />
       <WeekDay />
     </section>
     <TodoList />
-    <button class="add-btn">+</button>
+    <button class="add-btn" @click="toggleFormVisibility">
+      +
+    </button>
   </main>
 </template>
 
@@ -23,6 +25,16 @@ export default {
     Date,
     WeekDay,
     TodoList,
+  },
+  data() {
+    return {
+      formVisibility: false,
+    };
+  },
+  methods: {
+    toggleFormVisibility() {
+      this.formVisibility = !this.formVisibility;
+    },
   },
 };
 </script>
@@ -44,6 +56,10 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+input,
+button {
+  font-family: "Montserrat", sans-serif;
 }
 main {
   display: flex;
