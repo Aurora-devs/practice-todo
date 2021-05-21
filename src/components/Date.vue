@@ -25,7 +25,7 @@ export default {
   grid-area: day;
   font-weight: bold;
   font-size: 2.75rem;
-  line-height: 40px;
+  line-height: 35px;
   margin-right: 8px;
 }
 .month {
