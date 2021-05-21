@@ -13,12 +13,14 @@
 <script>
 import Date from "@/components/Date.vue";
 import WeekDay from "@/components/WeekDay.vue";
+import TodoList from "@/components/TodoList/TodoList.vue";
 
 export default {
   name: "App",
   components: {
     Date,
     WeekDay,
+    TodoList,
   },
 };
 </script>
