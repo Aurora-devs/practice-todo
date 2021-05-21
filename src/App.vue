@@ -1,7 +1,6 @@
 <template>
   <AddTodo />
   <main>
-    <h1>Todo</h1>
     <section class="date">
       <Date />
       <WeekDay />
@@ -12,8 +11,12 @@
 </template>
 
 <script>
+import Date from "@/components/Date.vue";
 export default {
   name: "App",
+  components: {
+    Date,
+  },
 };
 </script>
 
@@ -38,7 +41,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
   background-color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 }
@@ -50,6 +53,6 @@ main {
   height: 4rem;
   width: 4rem;
   border-radius: 50%;
-  margin-bottom: -3rem;
+  margin-bottom: -4rem;
 }
 </style>
