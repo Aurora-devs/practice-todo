@@ -14,10 +14,12 @@
 import Date from "@/components/Date.vue";
 import WeekDay from "@/components/WeekDay.vue";
 import TodoList from "@/components/TodoList/TodoList.vue";
+import AddTodo from "@/components/AddTodo.vue";
 
 export default {
   name: "App",
   components: {
+    AddTodo,
     Date,
     WeekDay,
     TodoList,
