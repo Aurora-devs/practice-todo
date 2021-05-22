@@ -55,10 +55,12 @@ const getTodo = asyncHandler(async (req, res) => {
 const updateTodo = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const title = req.body.title;
+  const check = req.body.check;
   const todo = await Todo.findById(id);
 
   if (todo) {
     todo.title = title || todo.title;
+    todo.check = check || todo.check;
   } else {
     res.status(404);
     throw new Error(`Todo with id: ${id} not found`);
