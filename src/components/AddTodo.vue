@@ -4,12 +4,12 @@
     @click="$emit('closeForm')"
     :class="formVisibility ? '' : 'hide'"
   ></span>
-  <div class="container" :class="formVisibility ? '' : 'hide'">
+  <form class="container" :class="formVisibility ? '' : 'hide'">
     <h2>Add todo item</h2>
     <input type="text" placeholder="Task title..." v-model="taskTitle" />
-    <button class="add" @click="addNewTodo(taskTitle)">Add</button
+    <button class="add" @click="addNewTodo($event, taskTitle)">Add</button
     ><button class="close" @click="$emit('closeForm')">Close</button>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -27,7 +27,8 @@ export default {
     };
   },
   methods: {
-    async addNewTodo(title) {
+    async addNewTodo(e, title) {
+      e.preventDefault();
       if (!title) {
         console.error("Task title is required");
       } else {
@@ -38,6 +39,7 @@ export default {
           },
           body: JSON.stringify({ title }),
         }).then(() => {
+          this.taskTitle = "";
           this.$emit("addNewTask");
         });
       }
