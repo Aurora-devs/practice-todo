@@ -1,11 +1,15 @@
 <template>
-  <AddTodo :formVisibility="formVisibility" @closeForm="toggleFormVisibility" />
+  <AddTodo
+    :formVisibility="formVisibility"
+    @closeForm="toggleFormVisibility"
+    @addNewTask="refreshList"
+  />
   <main>
     <section class="date">
       <Date />
       <WeekDay />
     </section>
-    <TodoList />
+    <TodoList :todos="todos" @deleteTodo="refreshList" />
     <button class="add-btn" @click="toggleFormVisibility">
       +
     </button>
@@ -29,11 +33,20 @@ export default {
   data() {
     return {
       formVisibility: false,
+      todos: [],
     };
+  },
+  async created() {
+    const res = await fetch("/api");
+    this.todos = await res.json();
   },
   methods: {
     toggleFormVisibility() {
       this.formVisibility = !this.formVisibility;
+    },
+    async refreshList() {
+      const res = await fetch("/api");
+      this.todos = await res.json();
     },
   },
 };

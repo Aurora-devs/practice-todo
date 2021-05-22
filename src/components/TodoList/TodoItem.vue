@@ -1,26 +1,18 @@
 <template>
-  <div
-    v-for="todo in todoList"
-    :key="todo.id"
-    class="item"
-    :class="todo.check ? 'done' : ''"
-  >
-    <p>{{ todo.title }}</p>
-    <input type="checkbox" name="done" v-model="todo.check" />
+  <div class="item" :class="item.check && 'done'">
+    <p>{{ item.title }}</p>
+    <input type="checkbox" name="done" :checked="item.check" />
   </div>
 </template>
 
 <script>
 export default {
   name: "TodoItem",
-  data() {
-    return {
-      todoList: {},
-    };
-  },
-  async created() {
-    const res = await fetch("/api");
-    this.todoList = await res.json();
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>

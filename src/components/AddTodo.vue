@@ -6,8 +6,8 @@
   ></span>
   <div class="container" :class="formVisibility ? '' : 'hide'">
     <h2>Add todo item</h2>
-    <input type="text" placeholder="Task title..." />
-    <button class="add">Add</button
+    <input type="text" placeholder="Task title..." v-model="taskTitle" />
+    <button class="add" @click="addNewTodo(taskTitle)">Add</button
     ><button class="close" @click="$emit('closeForm')">Close</button>
   </div>
 </template>
@@ -21,7 +21,29 @@ export default {
       required: true,
     },
   },
-  emits: ["closeForm"],
+  data() {
+    return {
+      taskTitle: "",
+    };
+  },
+  methods: {
+    async addNewTodo(title) {
+      if (!title) {
+        console.error("Task title is required");
+      } else {
+        await fetch("/api", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title }),
+        }).then(() => {
+          this.$emit("addNewTask");
+        });
+      }
+    },
+  },
+  emits: ["closeForm", "addNewTask"],
 };
 </script>
 
