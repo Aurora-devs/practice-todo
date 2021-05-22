@@ -9,7 +9,11 @@
       <Date />
       <WeekDay />
     </section>
-    <TodoList :todos="todos" @deleteTodo="refreshList" />
+    <TodoList
+      :todos="todos"
+      @deleteTodo="refreshList"
+      @toggleCheck="toggleCheck"
+    />
     <button class="add-btn" @click="toggleFormVisibility">
       +
     </button>
@@ -47,6 +51,20 @@ export default {
     async refreshList() {
       const res = await fetch("/api");
       this.todos = await res.json();
+    },
+    async toggleCheck(id) {
+      const res = await fetch(`/api/${id}`);
+      const oldTodo = await res.json();
+      const updatedCheck = {
+        check: !oldTodo.check,
+      };
+      await fetch(`/api/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCheck),
+      }).then(this.refreshList);
     },
   },
 };

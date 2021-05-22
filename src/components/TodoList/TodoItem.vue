@@ -1,7 +1,12 @@
 <template>
   <div class="item" :class="item.check && 'done'">
     <p>{{ item.title }}</p>
-    <input type="checkbox" name="done" :checked="item.check" />
+    <input
+      type="checkbox"
+      name="done"
+      :checked="item.check"
+      @change="$emit('toggleCheck', item._id)"
+    />
   </div>
 </template>
 
@@ -14,6 +19,7 @@ export default {
       required: true,
     },
   },
+  emits: ["toggleCheck"],
 };
 </script>
 

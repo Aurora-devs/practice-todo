@@ -5,6 +5,7 @@
       :key="todo._id"
       :item="todo"
       @dblclick="deleteTodo(todo._id)"
+      @toggleCheck="$emit('toggleCheck', $event)"
     />
   </div>
 </template>
@@ -32,7 +33,7 @@ export default {
       });
     },
   },
-  emits: ["deleteTodo"],
+  emits: ["deleteTodo", "toggleCheck"],
 };
 </script>
 
