@@ -80,6 +80,7 @@ const deleteTodo = asyncHandler(async (req, res) => {
 
   if (todo) {
     await todo.remove();
+    res.json("deleted");
   } else {
     res.status(404);
     throw new Error(`Todo with id: ${id} not found`);
