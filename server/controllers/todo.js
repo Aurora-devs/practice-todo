@@ -60,7 +60,7 @@ const updateTodo = asyncHandler(async (req, res) => {
 
   if (todo) {
     todo.title = title || todo.title;
-    todo.check = check || todo.check;
+    todo.check = check;
   } else {
     res.status(404);
     throw new Error(`Todo with id: ${id} not found`);
