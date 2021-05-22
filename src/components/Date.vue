@@ -1,14 +1,41 @@
 <template>
   <div class="container">
-    <div class="day">12</div>
-    <div class="month">JAN</div>
-    <div class="year">2021</div>
+    <div class="day">{{ day }}</div>
+    <div class="month">{{ month }}</div>
+    <div class="year">{{ year }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Date",
+  data() {
+    return {
+      day: "",
+      month: "",
+      year: "",
+    };
+  },
+  created() {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const current = new Date();
+    this.day = current.getDate();
+    this.month = monthNames[current.getMonth()].substring(0, 3).toUpperCase();
+    this.year = current.getFullYear();
+  },
 };
 </script>
 
