@@ -8,7 +8,7 @@
     <h2>Add todo item</h2>
     <input type="text" placeholder="Task title..." v-model="taskTitle" />
     <button class="add" @click="addNewTodo($event, taskTitle)">Add</button
-    ><button class="close" @click="$emit('closeForm')">Close</button>
+    ><button class="close" @click.prevent="$emit('closeForm')">Close</button>
   </form>
 </template>
 
