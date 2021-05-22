@@ -1,33 +1,27 @@
 <template>
-  <div class="item done">
-    <p>Buy new sweatshirt</p>
-    <input type="checkbox" name="done" checked />
-  </div>
-  <div class="item done">
-    <p>Begin promotional phase</p>
-    <input type="checkbox" name="done" checked />
-  </div>
-  <div class="item">
-    <p>Read an article</p>
-    <input type="checkbox" name="done" />
-  </div>
-  <div class="item">
-    <p>Watch "Sherlock"</p>
-    <input type="checkbox" name="done" />
-  </div>
-  <div class="item">
-    <p>Begin QA for the product</p>
-    <input type="checkbox" name="done" />
-  </div>
-  <div class="item">
-    <p>Go for a walk</p>
-    <input type="checkbox" name="done" />
+  <div
+    v-for="todo in todoList"
+    :key="todo.id"
+    class="item"
+    :class="todo.check ? 'done' : ''"
+  >
+    <p>{{ todo.title }}</p>
+    <input type="checkbox" name="done" v-model="todo.check" />
   </div>
 </template>
 
 <script>
 export default {
   name: "TodoItem",
+  data() {
+    return {
+      todoList: {},
+    };
+  },
+  async created() {
+    const res = await fetch("/api");
+    this.todoList = await res.json();
+  },
 };
 </script>
 
